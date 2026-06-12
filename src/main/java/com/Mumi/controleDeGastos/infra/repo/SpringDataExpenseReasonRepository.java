@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface SpringDataExpenseReasonRepository extends JpaRepository<ExpenseReason, UUID> {
-    List<Expense> findByReasonReason(String reason);
+    List<ExpenseReason> findByReasonReason(String reason);
 }

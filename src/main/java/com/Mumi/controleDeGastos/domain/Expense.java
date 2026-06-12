@@ -20,7 +20,6 @@ public class Expense {
     @Enumerated(EnumType.STRING)
     @Column(name = "who", nullable = false)
     private ExpensesWho who;
-    @Column(name = "reason", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reason_id", nullable = false)
     private ExpenseReason reason;

@@ -5,25 +5,25 @@ import com.Mumi.controleDeGastos.domain.ExpenseReason;
 import com.Mumi.controleDeGastos.domain.ExpensesWho;
 import com.Mumi.controleDeGastos.infra.repo.SpringDataExpenseRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 
-@RestController("/expense")
+@RestController
+@RequestMapping("/expense")
 public class ExpenseController {
     SpringDataExpenseRepository expenseRepository;
 
     public ExpenseController(SpringDataExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
-    @PostMapping
-    public ResponseEntity<String> createExpense(double amount, String who, String reason, String description) {
-        Expense expense = new Expense(BigDecimal.valueOf(amount), ExpensesWho.valueOf(who), new ExpenseReason(reason), description);
+    @PostMapping("/create")
+    public ResponseEntity<String> createExpense(@RequestBody ExpenseDto dto) {
+        Expense expense = new Expense(BigDecimal.valueOf(dto.amount()), ExpensesWho.valueOf(dto.who()), new ExpenseReason(dto.reason()), dto.description());
+        expenseRepository.save(expense);
         return ResponseEntity.ok("Expense created successfully");
     }
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<?> getAllExpenses() {
         return ResponseEntity.ok(expenseRepository.findAll());
     }

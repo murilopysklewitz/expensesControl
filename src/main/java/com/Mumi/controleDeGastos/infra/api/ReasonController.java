@@ -34,7 +34,7 @@ public class ReasonController {
         reasonRepository.deleteById(UUID.fromString(id));
         return ResponseEntity.ok("Reason deleted successfully");
     }
-    @GetMapping("/{reason}")
+    @GetMapping("/reason/{reason}")
     public ResponseEntity<?> getReasonByReason(@PathVariable String reason) {
         return ResponseEntity.ok(reasonRepository.findByReasonReason(reason));
     }

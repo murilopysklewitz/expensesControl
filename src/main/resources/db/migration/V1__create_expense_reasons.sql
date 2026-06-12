@@ -1,4 +1,4 @@
-CREATE TABLE expense_reasons(
+CREATE TABLE expense_reason(
     id UUID PRIMARY KEY NOT NULL,
     reason VARCHAR(100) UNIQUE NOT NULL
 );
